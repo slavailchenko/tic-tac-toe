@@ -60,7 +60,7 @@ const initGame = async () => {
     const { number } = srvBoard.setRandomValue();
     term.red( "\nIzya choose is '%s'\n" , number);
     checkStateGame(valueCell.tac);
-    await startGame();
+    await initGame();
 };
 
 term.on('key', (key) => {
