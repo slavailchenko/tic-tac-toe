@@ -30,7 +30,7 @@ const checkStateGame = (player) => {
     const isWinner = srvBoard.checkWin(player);
     const text = player === valueCell.tic ? 'WINNER' : 'LOOSER';
     if (isWinner) {
-        term.bold.cyan(`YOU ${text}. GAME OVER \n`);
+        term.bold.yellow(`YOU ${text}. GAME OVER \n`);
         term.processExit();
     }
     const isFilledCells = srvBoard.getIsFilledCells();
@@ -46,6 +46,10 @@ const inputNumber = async () => {
     term.green( "\nYour input is '%s'\n" , input);
     srvBoard.setCell(parseInt(input), valueCell.tic);
     const isRepeatTurn = srvBoard.getIsRepeatTurn();
+    if (parseInt(input) < 1 || parseInt(input) > 9) {
+        term.bold.cyan('Please correct. Input NUMBER (1-9) again \n');
+        await inputNumber();
+    }
     if (isRepeatTurn) {
         term.bold.cyan('This cell is filled. Input NUMBER (1-9) again \n');
         await inputNumber();
